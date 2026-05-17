@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+    font-family: "Rajdhani", sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #E10600;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-red {
+    background: rgba(225, 6, 0, 0.06);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(225, 6, 0, 0.15);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(225, 6, 0, 0.8);
+  }
+
+  .border-glow {
+    box-shadow: 0 0 20px rgba(225, 6, 0, 0.3), inset 0 0 20px rgba(225, 6, 0, 0.05);
+  }
+
+  .telemetry-line {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .telemetry-line::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(rgba(225,6,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(225,6,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .noise::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+}
