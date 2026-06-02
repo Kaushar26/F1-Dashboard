@@ -78,12 +78,6 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Live badge */}
-          <div className="hidden md:flex items-center gap-2 glass-red rounded px-3 py-1.5">
-            <span className="w-1.5 h-1.5 bg-f1red rounded-full animate-pulse" />
-            <span className="font-orbitron text-[10px] text-f1red tracking-widest">LIVE</span>
-          </div>
-
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen((p) => !p)}

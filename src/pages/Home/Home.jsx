@@ -4,37 +4,6 @@ import { useFetch } from "../../hooks/useFetch";
 import { getDriverStandings, getConstructorStandings, getLastRaceResults, getTeamColor, getFlag } from "../../services/api";
 import { DriverCardSkeleton } from "../../components/LoadingSkeleton/LoadingSkeleton";
 
-// Animated telemetry line SVG
-function TelemetryLines() {
-  return (
-    <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-      {[...Array(6)].map((_, i) => (
-        <motion.path
-          key={i}
-          d={`M ${-100 + i * 80} 0 L ${200 + i * 120} 900`}
-          stroke="#E10600"
-          strokeWidth="0.5"
-          fill="none"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: [0, 0.6, 0] }}
-          transition={{ duration: 3 + i * 0.5, delay: i * 0.4, repeat: Infinity, ease: "linear" }}
-        />
-      ))}
-      {/* Horizontal scan lines */}
-      {[100, 300, 500, 700].map((y, i) => (
-        <motion.line
-          key={`h-${i}`}
-          x1="0" y1={y} x2="1440" y2={y}
-          stroke="#E10600"
-          strokeWidth="0.3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.4, 0] }}
-          transition={{ duration: 4, delay: i * 0.7, repeat: Infinity }}
-        />
-      ))}
-    </svg>
-  );
-}
 
 // Top 3 mini driver chip
 function DriverChip({ standing, rank }) {
@@ -75,15 +44,15 @@ export default function Home() {
   const { data: lastRace } = useFetch(getLastRaceResults);
 
   const top3 = driverStandings?.slice(0, 3) || [];
-  const leader = driverStandings?.[0];
+  
 
   return (
     <div className="min-h-screen">
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         {/* Background layers */}
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <TelemetryLines />
+        
+        
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-f1dark/40 to-f1dark" />
 
         {/* Red corner accent */}
@@ -156,11 +125,7 @@ export default function Home() {
             >
               <div className="glass-red rounded-2xl p-6 border border-f1red/20">
                 <div className="flex items-center gap-2 mb-6">
-                  <motion.span
-                    animate={{ opacity: [1, 0.3, 1] }}
-                    transition={{ duration: 1.2, repeat: Infinity }}
-                    className="w-2 h-2 bg-f1red rounded-full"
-                  />
+                  <span className="w-2 h-2 bg-f1red rounded-full" />
                   <span className="font-orbitron text-f1red text-xs tracking-widest">
                     CHAMPIONSHIP STANDINGS
                   </span>
@@ -192,16 +157,6 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-f1muted"
-        >
-          <div className="w-px h-8 bg-gradient-to-b from-f1red to-transparent" />
-          <span className="font-orbitron text-[10px] tracking-widest">SCROLL</span>
-        </motion.div>
       </section>
 
       {/* LAST RACE RESULT */}
