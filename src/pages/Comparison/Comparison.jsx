@@ -75,7 +75,7 @@ function DriverSelector({ standings, selected, onSelect, label, accentColor }) {
                   s.Driver.driverId === selected ? "bg-f1red/10" : ""
                 }`}
               >
-                <span>{getFlag(s.Driver.nationality)}</span>
+                import { getDriverStandings, getDriverSeasonResults, getTeamColor, getFlag } from "../../services/api";
                 <div className="flex-1">
                   <div className="font-orbitron text-white text-xs">
                     {s.Driver.givenName} {s.Driver.familyName}
@@ -100,7 +100,7 @@ function StatBar({ label, val1, val2, color1, color2, max }) {
   const w2 = max ? (val2 / max) * 100 : 0;
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 pb-4 border-b border-f1border/30">
       <div className="flex justify-between items-center mb-1.5">
         <span className="font-orbitron text-xs" style={{ color: color1 }}>{val1}</span>
         <span className="font-rajdhani text-f1muted text-xs tracking-widest uppercase">{label}</span>

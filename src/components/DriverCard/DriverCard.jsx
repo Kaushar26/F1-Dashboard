@@ -1,5 +1,6 @@
+// import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { getFlag, getTeamColor } from "../../services/api";
+import { getFlag, getTeamColor, getDriverImage } from "../../services/api";
 
 const POSITION_COLORS = {
   1: "text-yellow-400",
@@ -12,6 +13,8 @@ export default function DriverCard({ standing, index }) {
   const constructor = standing.Constructors?.[0];
   const teamColor = getTeamColor(constructor?.constructorId);
   const pos = parseInt(standing.position);
+  const photo = getDriverImage(driver.driverId);
+
 
   return (
     <motion.div
@@ -27,6 +30,12 @@ export default function DriverCard({ standing, index }) {
         className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
         style={{ backgroundColor: teamColor }}
       />
+
+      {photo && (
+        <div className="absolute right-4 top-12 w-20 h-20 opacity-20 group-hover:opacity-60 transition-opacity duration-300">
+          <img src={photo} alt={driver.familyName} className="w-full h-full object-contain" />
+        </div>
+      )}
 
       {/* Position badge */}
       <div className="flex items-start justify-between mb-4">
@@ -88,8 +97,10 @@ export default function DriverCard({ standing, index }) {
       </div>
 
       {/* Hover glow */}
-      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{ boxShadow: `inset 0 0 30px ${teamColor}10` }} />
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ boxShadow: `inset 0 0 30px ${teamColor}10` }}
+      />
     </motion.div>
   );
 }

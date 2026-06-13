@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "HOME", path: "/" },
+  { label: "ANALYTICS", path: "/analytics" },
   { label: "DRIVERS", path: "/drivers" },
   { label: "TEAMS", path: "/teams" },
   { label: "CALENDAR", path: "/calendar" },
   { label: "COMPARE", path: "/compare" },
-  { label: "ANALYTICS", path: "/analytics" },
 ];
 
 export default function Navbar() {
